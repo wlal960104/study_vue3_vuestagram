@@ -4,17 +4,18 @@
             <li>Cancel</li>
         </ul>
         <ul class="header-button-right">
-            <li>Next</li>
+            <li v-if="step === 1" @click="step++">Next</li>
+            <li v-if="step === 2" @click="publish">발행</li>
+
         </ul>
         <img src="./assets/logo.png" class="logo" />
     </div>
-
-    <Container :data="data" :step="step"/>
+    <Container :data="data" :step="step" :url="url" @sendMyText="this.myText = $event"/>
     <button @click="more">더보기</button>
 
     <div class="footer">
         <ul class="footer-button-plus">
-            <input type="file" id="file" class="inputfile" />
+            <input @change="upload" type="file" id="file" class="inputfile" />
             <label for="file" class="input-plus">+</label>
         </ul>
     </div>
@@ -32,7 +33,9 @@ export default {
         return {
             data : data,
             clickNum : 0,
-            step: 2 // 페이징 처리를 위한 변수 (step 0: post, step 1: 필터선택화면, step 2: 글 쓰는 화면)
+            step: 0, // 페이징 처리를 위한 변수 (step 0: post, step 1: 필터선택화면, step 2: 글 쓰는 화면)
+            url: '',
+            myText : '', // 자식 컴포넌트에서 받아와야 할 텍스트
         }
     },
     components: {
@@ -53,6 +56,39 @@ export default {
                     console.log(err)
                 })
         },
+        // 업로드 함수 (업로드 후엔 다음 페이지로 보내기 + 업로드한 이미지 띄우기)
+        // 파일 업로드하는 방법
+        // 1. FileReader(): 파일을 글자로 변환해줌
+        // 2. URL.createObjectURL(): 이미지의 가상 URL을 생성해줌
+        upload(e) {
+            let file = e.target.files;
+            console.log(file[0]);
+            let url = URL.createObjectURL(file[0])
+            console.log('url > ', url)
+            this.url = url;
+            console.log('this > ', this)
+            this.step++; // 다음 페이지로 보내기
+        },
+        // 발행버튼 클릭 시
+        publish() {
+            console.log('myText > ', this.myText);
+            // 발행버튼 누르면?
+            // this.data 에 내가 쓴 글 밀어 넣기
+            var myContent = {
+                name: "Kim Hyun",
+                userImage: "https://picsum.photos/100?random=3",
+                postImage: `${this.url}`,
+                likes: 36,
+                date: "May 15",
+                liked: false,
+                content: this.myText,
+                filter: "perpetua"
+            };
+
+            this.data.unshift(myContent); // unshift: 제일 앞쪽에 자료 넣기
+            this.step = 0; // 첫 페이지로 변
+
+        }
     }
 
 }
