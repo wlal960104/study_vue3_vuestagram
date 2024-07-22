@@ -10,7 +10,7 @@
         </ul>
         <img src="./assets/logo.png" class="logo" />
     </div>
-    <Container :data="data" :step="step" :url="url" @sendMyText="this.myText = $event"/>
+    <Container :data="data" :step="step" :url="url" @write="myText = $event"/>
     <button @click="more">더보기</button>
 
     <div class="footer">
