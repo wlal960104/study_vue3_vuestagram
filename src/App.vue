@@ -12,12 +12,12 @@
     <Container :data="data"/>
     <button @click="more">더보기</button>
 
-    <div v-if="content[0] === true">내용0</div>
-    <div v-if="content[1] === true">내용1</div>
-    <div v-if="content[2] === true">내용2</div>
-    <button @click="showConent(0)" >버튼0</button>
-    <button @click="showConent(1)">버튼1</button>
-    <button @click="showConent(2)">버튼2</button>
+    <div v-if="step === 0">내용0</div>
+    <div v-if="step === 1">내용1</div>
+    <div v-if="step === 2">내용2</div>
+    <button @click="step = 0" >버튼0</button>
+    <button @click="step = 1">버튼1</button>
+    <button @click="step = 2">버튼2</button>
 
     <div class="footer">
         <ul class="footer-button-plus">
@@ -39,7 +39,7 @@ export default {
         return {
             data : data,
             clickNum : 0,
-            content: [false,false,false]
+            step: 0
         }
     },
     components: {
@@ -48,8 +48,6 @@ export default {
     methods: {
         // 더보기 클릭 시
         more () {
-            console.log('더보기 클릭')
-            console.log('clickNum >', this.clickNum);
             // axios 라이브러리 사용
             // 실패시 실행할 코드는 .catch()
             axios.get(`https://codingapple1.github.io/vue/more${this.clickNum}.json`)
@@ -62,15 +60,6 @@ export default {
                     console.log(err)
                 })
         },
-        showConent (num) {
-            this.content.forEach((n,i)=>{
-                if (i === num) {
-                    this.content[i] = true;
-                } else {
-                    this.content[i] = false;
-                }
-            });
-        }
     }
 
 }
