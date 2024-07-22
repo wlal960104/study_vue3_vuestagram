@@ -64,14 +64,11 @@ export default {
             let file = e.target.files;
             console.log(file[0]);
             let url = URL.createObjectURL(file[0])
-            console.log('url > ', url)
             this.url = url;
-            console.log('this > ', this)
             this.step++; // 다음 페이지로 보내기
         },
         // 발행버튼 클릭 시
         publish() {
-            console.log('myText > ', this.myText);
             // 발행버튼 누르면?
             // this.data 에 내가 쓴 글 밀어 넣기
             var myContent = {

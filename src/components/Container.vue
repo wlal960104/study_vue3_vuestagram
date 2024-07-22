@@ -9,11 +9,8 @@
         <div v-if="step === 1">
             <div class="upload-image" :style="`background: url(${url})`"></div>
             <div class="filters">
-                <div class="filter-1"></div>
-                <div class="filter-1"></div>
-                <div class="filter-1"></div>
-                <div class="filter-1"></div>
-                <div class="filter-1"></div>
+                <!-- 필터 영역 -->
+                <FilterBox v-for="(a,i) in filterData" :key="a" :url="url" :filterName="filterData[i]"></FilterBox>
             </div>
         </div>
 
@@ -29,16 +26,21 @@
 
 <script>
 import Post from './Post.vue'
+import FilterBox from "@/components/FilterBox.vue";
+import filterData from "@/assets/filterData";
+
 export default {
     name: 'Container',
     data() {
         return {
-            myText : ''
+            filterData
+            // myText : ''
             // step: 0 // 페이징 처리를 위한 변수 (step 0: post, step 1: 필터선택화면, step 2: 글 쓰는 화면)
         }
     },
     components : {
-        Post : Post
+        Post : Post,
+        FilterBox : FilterBox
     },
     props : {
         data : Array,
