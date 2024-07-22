@@ -1,5 +1,7 @@
 <template>
-    <div :class="`${filterName} filter-item`" :style="`background-image: url(${url})`"></div>
+    <div :class="`${filterName} filter-item`" :style="`background-image: url(${url})`">
+        <slot></slot> <!-- slot : html 내용 데이터바인딩만 할 수 있음 / 여러개 바인딩 할때는 props가 더 편리하다. -->
+    </div>
 </template>
 
 <script>

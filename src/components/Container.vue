@@ -10,7 +10,9 @@
             <div class="upload-image" :style="`background: url(${url})`"></div>
             <div class="filters">
                 <!-- 필터 영역 -->
-                <FilterBox v-for="(a,i) in filterData" :key="a" :url="url" :filterName="filterData[i]"></FilterBox>
+                <FilterBox v-for="(a,i) in filterData" :key="a" :url="url" :filterName="filterData[i]">
+                    {{a}}
+                </FilterBox>
             </div>
         </div>
 
