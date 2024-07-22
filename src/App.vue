@@ -10,7 +10,7 @@
         </ul>
         <img src="./assets/logo.png" class="logo" />
     </div>
-    <Container :data="data" :step="step" :url="url" @write="myText = $event"/>
+    <Container :data="data" :step="step" :url="url" :filterName="filterName" @write="myText = $event"/>
     <button @click="more">더보기</button>
 
     <div class="footer">
@@ -36,7 +36,16 @@ export default {
             step: 0, // 페이징 처리를 위한 변수 (step 0: post, step 1: 필터선택화면, step 2: 글 쓰는 화면)
             url: '',
             myText : '', // 자식 컴포넌트에서 받아와야 할 텍스트
+            filterName : ''
         }
+    },
+    mounted() {
+        // 수신은 mounted 안에 작성하는 것이 관습적임
+        // 많이 쓰면 관리가 힘들어지기 때문에 대체품인 'Vuex'를 쓴다.
+        this.emitter.on('sendFilterName', (data) => {
+            this.filterName = data; // 필터네임 저장
+            console.log(data);
+        });
     },
     components: {
       Container : Container

@@ -7,7 +7,7 @@
 
         <!-- 필터선택페이지 -->
         <div v-if="step === 1">
-            <div class="upload-image" :style="`background: url(${url})`"></div>
+            <div :class="`${filterName} upload-image`" :style="`background: url(${url})`"></div>
             <div class="filters">
                 <!-- 필터 영역 -->
                 <FilterBox v-for="(a,i) in filterData" :key="a" :url="url" :filterName="filterData[i]">
@@ -47,10 +47,11 @@ export default {
     props : {
         data : Array,
         step : Number,
-        url : String
+        url : String,
+        filterName : String
     },
     updated () {
-        this.$emit('sendMyText', this.myText);
+        // this.$emit('sendMyText', this.myText);
     }
 }
 </script>
