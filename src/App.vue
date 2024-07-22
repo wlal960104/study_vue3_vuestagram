@@ -9,15 +9,8 @@
         <img src="./assets/logo.png" class="logo" />
     </div>
 
-    <Container :data="data"/>
+    <Container :data="data" :step="step"/>
     <button @click="more">더보기</button>
-
-    <div v-if="step === 0">내용0</div>
-    <div v-if="step === 1">내용1</div>
-    <div v-if="step === 2">내용2</div>
-    <button @click="step = 0" >버튼0</button>
-    <button @click="step = 1">버튼1</button>
-    <button @click="step = 2">버튼2</button>
 
     <div class="footer">
         <ul class="footer-button-plus">
@@ -39,7 +32,7 @@ export default {
         return {
             data : data,
             clickNum : 0,
-            step: 0
+            step: 2 // 페이징 처리를 위한 변수 (step 0: post, step 1: 필터선택화면, step 2: 글 쓰는 화면)
         }
     },
     components: {
