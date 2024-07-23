@@ -17,6 +17,9 @@
     <h4> 나이 : {{$store.state.age}}</h4>
     <button @click="$store.commit('plusAge', 10)">버튼</button>
 
+    <p>{{$store.state.more}}</p>
+    <button @click="$store.dispatch('getData')">더보기 버튼</button>
+
     <Container :data="data" :step="step" :url="url" @write="myText = $event"/>
     <button @click="more">더보기</button>
 
