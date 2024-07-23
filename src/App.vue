@@ -11,17 +11,22 @@
         <img src="./assets/logo.png" class="logo" />
     </div>
 
-    <h4>안녕 {{$store.state.name}}</h4>
-    <button @click="$store.commit('이름변경')">버튼</button>
+    <!-- vuex 실습 -->
+<!--    <h4>안녕 {{$store.state.name}}</h4>-->
+<!--    <button @click="$store.commit('이름변경')">버튼</button>-->
 
-    <h4> 나이 : {{$store.state.age}}</h4>
-    <button @click="$store.commit('plusAge', 10)">버튼</button>
+<!--    <h4> 나이 : {{$store.state.age}}</h4>-->
+<!--    <button @click="$store.commit('plusAge', 10)">버튼</button>-->
 
-    <p>{{$store.state.more}}</p>
-    <button @click="$store.dispatch('getData')">더보기 버튼</button>
+<!--    <p>{{$store.state.more}}</p>-->
+<!--    <button @click="$store.dispatch('getData')">더보기 버튼</button>-->
+    <!-- // vuex 실습 끝 -->
 
     <Container :data="data" :step="step" :url="url" @write="myText = $event"/>
     <button @click="more">더보기</button>
+
+    <p>{{now2}} {{카운터}}</p>
+    <button @click="카운터++">버튼</button>
 
     <div class="footer">
         <ul class="footer-button-plus">
@@ -46,7 +51,8 @@ export default {
             step: 0, // 페이징 처리를 위한 변수 (step 0: post, step 1: 필터선택화면, step 2: 글 쓰는 화면)
             url: '',
             myText : '', // 자식 컴포넌트에서 받아와야 할 텍스트
-            filterName : ''
+            filterName : '',
+            카운터: 0
         }
     },
     mounted() {
@@ -104,8 +110,23 @@ export default {
             this.data.unshift(myContent); // unshift: 제일 앞쪽에 자료 넣기
             this.step = 0; // 첫 페이지로 변
 
+        },
+        now() {
+            return new Date()
+        }
+    },
+
+    // < methods vs computed >
+    // methods 함수는 사용할 때마다 실행됨
+    // computed 함수는 사용해도 실행되지 않음, 처음 실행하고 값을 간직함 => 계산 결과 저장용 함수들
+    computed : {
+        now2() {
+            return new Date()
         }
     }
+
+
+
 
 }
 </script>
