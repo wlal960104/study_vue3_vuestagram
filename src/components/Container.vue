@@ -2,7 +2,7 @@
     <div>
         <!-- vue3부터 v-if와 v-for 동시에 쓰지 못 함-->
         <div v-if="step === 0">
-            <Post :post="data[i]" v-for="(a,i) in data" :key="i"/>
+            <Post :post="data[i]" v-for="(a,i) in data" :key="i" :filterName="filterName"/>
         </div>
 
         <!-- 필터선택페이지 -->
@@ -18,7 +18,7 @@
 
         <!-- 글작성페이지 -->
         <div v-if="step === 2">
-            <div class="upload-image" :style="`background: url(${url})`"></div>
+            <div :class="`${filterName} upload-image`" :style="`background: url(${url})`"></div>
             <div class="write">
                 <textarea class="write-box" @input="$emit('write', $event.target.value)" placeholder="write!"></textarea>
             </div>
@@ -35,7 +35,8 @@ export default {
     name: 'Container',
     data() {
         return {
-            filterData
+            filterData,
+            filterName : '',
             // myText : ''
             // step: 0 // 페이징 처리를 위한 변수 (step 0: post, step 1: 필터선택화면, step 2: 글 쓰는 화면)
         }
@@ -48,11 +49,18 @@ export default {
         data : Array,
         step : Number,
         url : String,
-        filterName : String
     },
     updated () {
         // this.$emit('sendMyText', this.myText);
-    }
+    },
+    mounted() {
+        // 수신은 mounted 안에 작성하는 것이 관습적임
+        // 많이 쓰면 관리가 힘들어지기 때문에 대체품인 'Vuex'를 쓴다.
+        this.emitter.on('sendFilterName', (data) => {
+            this.filterName = data; // 필터네임 저장
+            console.log(data);
+        });
+    },
 }
 </script>
 

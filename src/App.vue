@@ -10,7 +10,14 @@
         </ul>
         <img src="./assets/logo.png" class="logo" />
     </div>
-    <Container :data="data" :step="step" :url="url" :filterName="filterName" @write="myText = $event"/>
+
+    <h4>안녕 {{$store.state.name}}</h4>
+    <button @click="$store.commit('이름변경')">버튼</button>
+
+    <h4> 나이 : {{$store.state.age}}</h4>
+    <button @click="$store.commit('plusAge', 10)">버튼</button>
+
+    <Container :data="data" :step="step" :url="url" @write="myText = $event"/>
     <button @click="more">더보기</button>
 
     <div class="footer">
@@ -88,7 +95,7 @@ export default {
                 date: "May 15",
                 liked: false,
                 content: this.myText,
-                filter: "perpetua"
+                filter: this.filterName
             };
 
             this.data.unshift(myContent); // unshift: 제일 앞쪽에 자료 넣기

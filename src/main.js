@@ -8,4 +8,6 @@ app.config.globalProperties.emitter = emitter; // 글로벌한 변수 보관함,
 // ex) app.config.globalProperties.axios = axis;
 // => vue 파일에서 import axios 해올 필요 없이 this.axios 로 사용 가능
 
-app.mount('#app')
+import store from './store.js'
+
+app.use(store).mount('#app')
