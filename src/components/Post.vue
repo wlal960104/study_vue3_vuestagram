@@ -7,8 +7,8 @@
         <!-- :style="~" 집어넣을 때 object 자료도 가능 (style="{속성명 : 값}") / 백틱기호 사용으로 변수 넣기-->
         <div @click="$store.commit('goLikes')" :class="`${filterName} post-body`" :style="{backgroundImage : `url(${post.postImage})`}"></div>
         <div class="post-content">
-            <p>{{ post.likes }} Likes</p>
-<!--            <p>{{ $store.state.likes }} Likes</p>-->
+<!--            <p>{{ post.likes }} Likes</p>-->
+            <p>{{ $store.state.likes }} Likes</p>
             <p><strong>{{ post.name }}</strong> {{ post.content }}</p>
             <p class="date">{{ post.date }}</p>
         </div>

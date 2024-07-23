@@ -11,7 +11,7 @@ const store = createStore({
             name : 'kim',
             age : 20,
             likes : 30,
-            isLike : true
+            isLike : false
         }
     },
     mutations : {
@@ -26,12 +26,12 @@ const store = createStore({
         },
         goLikes(state) {
             console.log('state > ', state);
-            if (state.isLike === true) {
-                state.likes++;
-                state.isLike = false;
+            if (state.isLike === false) {
+                state.likes++
+                state.isLike = true;
             } else {
                 state.likes--
-                state.isLike = true;
+                state.isLike = false;
             }
         }
     }
